@@ -23,6 +23,22 @@ $ splitbmf -t ogg -i bmf.mp3 < desc.txt
 then, resulting files will be of file type `ogg` and `-codec copy` can't be
 used. Transcoding takes place, therefore taking more time.
 
+### Youtube
+
+One can easily use this program in combination with [`youtube-dl`][ytdl]. For e.g.
+
+```sh
+$ url='https://www.youtube.com/watch?v=SIKSc397sn4'
+$ youtube-dl --extract-audio --audio-format mp3 $url
+$ youtube-dl --get-description $url >desc.txt
+```
+
+The file `desc.txt`, graciously provided by the Youtube user, has to be
+formatted in the manner described in Section *File description format*. Then,
+one can extract audio files in the same fashion demonstrated above.
+
+[ytdl]: http://rg3.github.io/youtube-dl/
+
 ## File description format
 
 The file has to
