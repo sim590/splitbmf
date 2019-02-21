@@ -41,8 +41,6 @@ one can extract audio files in the same fashion demonstrated above.
 
 ## File description format
 
-The file has to
-
 ```
 time1 Title 1
 time2 Title 2
