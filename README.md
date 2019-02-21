@@ -8,16 +8,16 @@ Split a Big MP3 (or any media) File in separate tracks.
 Let the file `bmf.mp3` and a file description (see next section for
 specification) in some file `desc.txt`. One splits the file with:
 
-```
-splitbmf -i bmf.mp3 < desc.txt
+```sh
+$ splitbmf -i bmf.mp3 < desc.txt
 ```
 
 The resulting files are output in the current directory in the same file type as
 the input file (`mp3`). Therefore, `ffmpeg`'s `-codec copy` is used. If one uses
 option `-t` like so:
 
-```
-splitbmf -t ogg -i bmf.mp3 < desc.txt
+```sh
+$ splitbmf -t ogg -i bmf.mp3 < desc.txt
 ```
 
 then, resulting files will be of file type `ogg` and `-codec copy` can't be
