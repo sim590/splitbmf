@@ -1,2 +1,9 @@
 # Vim files
 *.sw[p|o]
+
+# Setuptools
+*.pyc
+build/
+dist/
+install_record.txt
+splitbmf.egg-info/

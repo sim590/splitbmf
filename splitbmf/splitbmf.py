@@ -7,9 +7,6 @@ import re
 import subprocess
 import argparse
 
-PRGNAME = "splitbmf"
-VERSION = 0.1
-
 FFMPEG_TEMPLATE    = [ "ffmpeg", "-y", "-nostdin", "-i", "INPUTFILE", "-ss", "BEGIN", "-to", "END", "OUTFILE.TYPE" ]
 TRACK_DESC_PATTERN = "(([0-9]{2}:?){3})(.*)"
 
@@ -20,11 +17,11 @@ def DEBUG_PRINT(*args, **kwargs):
     print("[DEBUG]"+component, *args, file=sys.stderr)
 
 def main():
-    ap = argparse.ArgumentParser(prog=PRGNAME)
+    ap = argparse.ArgumentParser(prog=__name__)
     ap.add_argument( "-t", "--type", nargs=1, type=str,
             help="Media type. Possible values are those understood by ffmpeg such as mp3,ogg,... Default is mp3.")
     ap.add_argument( "-i", "--input-file", required=True, nargs=1, type=str, help="Input file path.")
-    ap.add_argument("-v", "--version", action="version", version="%(prog)s "+str(VERSION))
+    ap.add_argument("-v", "--version", action="version", version="%(prog)s "+str(__version__))
     pa = ap.parse_args()
 
     cmd = FFMPEG_TEMPLATE
