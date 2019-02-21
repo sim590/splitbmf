@@ -51,6 +51,10 @@ Time is specified in the well-known format `HH:MM:SS`. Everything that comes
 after the time specification is part of the output file title appended before
 the file type extension.
 
+## Dependencies
+
+* [FFmpeg](https://ffmpeg.org/)
+
 ## Author
 
 Simon Désaulniers <sim.desaulniers@gmail.com>
