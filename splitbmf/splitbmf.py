@@ -54,5 +54,5 @@ def main():
 if __name__ == "__main__":
     main()
 
-#  vim: set sts=4 ts=8 sw=4 tw=120 et :
+#  vim: set sts=4 ts=4 sw=4 tw=120 et :
 

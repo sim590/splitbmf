@@ -9,5 +9,5 @@ __version_info__ = (0, 1)
 __version__      = '.'.join(str(e) for e in __version_info__)
 __description__  = "Split a Big MP3 (or any media) File in separate tracks."
 
-#  vim: set sts=4 ts=8 sw=4 tw=120 et :
+#  vim: set sts=4 ts=4 sw=4 tw=120 et :
 
