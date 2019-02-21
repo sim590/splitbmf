@@ -8,6 +8,7 @@ import subprocess
 import argparse
 
 PRGNAME = "splitbmf"
+VERSION = 0.1
 
 FFMPEG_TEMPLATE    = [ "ffmpeg", "-y", "-nostdin", "-i", "INPUTFILE", "-ss", "BEGIN", "-to", "END", "OUTFILE.TYPE" ]
 TRACK_DESC_PATTERN = "(([0-9]{2}:?){3})(.*)"
@@ -23,6 +24,7 @@ def main():
     ap.add_argument( "-t", "--type", nargs=1, type=str,
             help="Media type. Possible values are those understood by ffmpeg such as mp3,ogg,... Default is mp3.")
     ap.add_argument( "-i", "--input-file", required=True, nargs=1, type=str, help="Input file path.")
+    ap.add_argument("-v", "--version", action="version", version="%(prog)s "+str(VERSION))
     pa = ap.parse_args()
 
     cmd = FFMPEG_TEMPLATE
