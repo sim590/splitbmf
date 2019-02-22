@@ -13,6 +13,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+import splitbmf
+
 import os
 import sys
 import re
@@ -29,11 +32,11 @@ def DEBUG_PRINT(*args, **kwargs):
     print("[DEBUG]"+component, *args, file=sys.stderr)
 
 def main():
-    ap = argparse.ArgumentParser(prog=__name__)
+    ap = argparse.ArgumentParser(prog=splitbmf.__name__)
     ap.add_argument( "-t", "--type", nargs=1, type=str,
             help="Media type. Possible values are those understood by ffmpeg such as mp3,ogg,... Default is mp3.")
     ap.add_argument( "-i", "--input-file", required=True, nargs=1, type=str, help="Input file path.")
-    ap.add_argument("-v", "--version", action="version", version="%(prog)s "+str(__version__))
+    ap.add_argument("-v", "--version", action="version", version="%(prog)s "+str(splitbmf.__version__))
     pa = ap.parse_args()
 
     cmd = FFMPEG_TEMPLATE
@@ -62,9 +65,6 @@ def main():
         if DEBUG:
             DEBUG_PRINT("cmd: ", cmd)
         subprocess.run(cmd)
-
-if __name__ == "__main__":
-    main()
 
 #  vim: set sts=4 ts=4 sw=4 tw=120 et :
 
