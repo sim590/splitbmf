@@ -22,7 +22,8 @@ import re
 import subprocess
 import argparse
 
-FFMPEG_TEMPLATE    = [ "ffmpeg", "-y", "-nostdin", "-i", "INPUTFILE", "-ss", "BEGIN", "-to", "END", "OUTFILE.TYPE" ]
+MAX_FILE_SIZE      = 512*1024*1024
+FFMPEG_TEMPLATE    = [ "ffmpeg", "-y", "-nostdin", "-i", "INPUTFILE", "-ss", "BEGIN", "OUTFILE.TYPE" ]
 TRACK_DESC_PATTERN = "(([0-9]{2}:?){3})(.*)"
 
 DEBUG = False
@@ -46,11 +47,12 @@ def main():
     cmd[cmd.index("-i")+1] = pa.input_file[0]
     _,intype = os.path.splitext(pa.input_file[0])
     intype = intype[1:]
-    for line1 in sys.stdin:
-        line2 = sys.stdin.readline()
+    lines = sys.stdin.readlines(MAX_FILE_SIZE)
+    for ln,line1 in enumerate(lines):
+        line2 = lines[ln+1] if ln + 1 < len(lines) else None
 
         l1re = re.search(TRACK_DESC_PATTERN, line1)
-        l2re = re.search(TRACK_DESC_PATTERN, line2)
+        l2re = re.search(TRACK_DESC_PATTERN, line2) if line2 else None
 
         begin = l1re.group(1) if l1re else None
         end   = l2re.group(1) if l2re else None
@@ -59,12 +61,12 @@ def main():
         if DEBUG:
             DEBUG_PRINT("begin: ", begin, "end: ", end, "track: ", track)
 
-        cmd[cmd.index("-ss")+1] = begin
-        cmd[cmd.index("-to")+1] = end
+        ssi = cmd.index("-ss")
+        cmd[ssi+1] = begin
         cmd[-1] = track + "." + (pa.type[0] if pa.type else intype)
         if DEBUG:
             DEBUG_PRINT("cmd: ", cmd)
-        subprocess.run(cmd)
+        subprocess.run(cmd if not end else cmd[:ssi+2] + [ "-to", end ] + cmd[ssi+2:])
 
 #  vim: set sts=4 ts=4 sw=4 tw=120 et :
 
