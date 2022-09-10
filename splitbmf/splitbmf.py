@@ -24,7 +24,7 @@ import argparse
 
 MAX_FILE_SIZE      = 512*1024*1024
 FFMPEG_TEMPLATE    = [ "ffmpeg", "-y", "-nostdin", "-i", "INPUTFILE", "-ss", "BEGIN", "OUTFILE.TYPE" ]
-TRACK_DESC_PATTERN = "(([0-9]{2}:?){3})(.*)"
+TRACK_DESC_PATTERN = "(([0-9]{2}:?){3})\s*(.*)"
 
 DEBUG = False
 
